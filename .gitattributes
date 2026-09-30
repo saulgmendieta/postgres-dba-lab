@@ -1,0 +1,4 @@
+# Keep LF line endings everywhere (scripts run in Linux/WSL; avoids CRLF breakage from Windows)
+* text=auto eol=lf
+*.sh text eol=lf
+*.sql text eol=lf

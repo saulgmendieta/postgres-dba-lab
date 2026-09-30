@@ -1,0 +1,26 @@
+# "app" instance: PostgreSQL 18 in Docker (Docker Desktop with WSL2 integration).
+# Project name matches the original ~/dev/postgres setup, so it reuses the existing
+# volume (postgres_pgdata). Do not run both copies at once: both publish port 5433.
+name: postgres
+
+services:
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: postgres
+    ports:
+      # bound to localhost only; 5433 keeps 5432 free for other servers
+      - "127.0.0.1:5433:5432"
+    volumes:
+      # PostgreSQL 18+ images keep data under /var/lib/postgresql (versioned subdirectory)
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

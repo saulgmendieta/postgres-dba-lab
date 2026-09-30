@@ -1,0 +1,22 @@
+# secrets
+.env
+*.pem
+*.key
+.pgpass
+
+# data, dumps and backups (never commit database contents)
+*.dump
+*.backup
+*.sql.gz
+pgdata/
+backups/
+wal_archive/
+
+# logs
+*.log
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
